@@ -1,0 +1,30 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build and push Docker image
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      run: |
+        if [[ "$GITHUB_REF" == "refs/tags/"* ]]; then
+          # get tag name (remove "refs/tags/")
+          TAG=${GITHUB_REF#refs/tags/}
+          make build-tag TAG=$TAG
+          make push-tag TAG=$TAG
+        else
+          make ci-cd
+        fi
