@@ -22,7 +22,8 @@ RUN apt install -y \
     bison flex gettext texinfo libncurses5-dev libncursesw5-dev xxd \
     gperf automake libtool pkg-config build-essential gperf genromfs \
     libgmp-dev libmpc-dev libmpfr-dev libisl-dev binutils-dev libelf-dev \
-    libexpat-dev gcc-multilib g++-multilib picocom u-boot-tools util-linux
+    libexpat-dev gcc-multilib g++-multilib picocom u-boot-tools util-linux \
+    zip unzip
 
 # NuttX Kconfig frontend
 RUN apt install -y kconfig-frontends
