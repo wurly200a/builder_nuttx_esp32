@@ -1,7 +1,8 @@
 DOCKER_USERNAME ?= wurly
 DOCKER_IMAGE_NAME ?= builder_nuttx_esp32
+XTENSA_ARCH ?= esp32
 
-BUILD_ARGS := --build-arg IMAGE_NAME=${DOCKER_IMAGE_NAME}
+BUILD_ARGS := --build-arg IMAGE_NAME=${DOCKER_IMAGE_NAME} --build-arg XTENSA_ARCH=${XTENSA_ARCH}
 
 .PHONY: build
 build:

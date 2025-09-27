@@ -2,6 +2,7 @@ FROM ubuntu:22.04
 
 ARG USER_NAME="builder"
 ARG GROUP_NAME="builder"
+ARG XTENSA_ARCH="esp32"
 ARG IMAGE_NAME
 
 RUN if [ -z "${USER_NAME}"  ] || \
@@ -40,7 +41,7 @@ RUN mkdir -p ~/esp
 RUN git clone --recursive https://github.com/espressif/esp-idf.git -b v5.3 ~/esp/esp-idf
 
 # ESP-IDF Set up the tools
-RUN ~/esp/esp-idf/install.sh esp32
+RUN ~/esp/esp-idf/install.sh ${XTENSA_ARCH}
 RUN echo "alias get_idf='. $HOME/esp/esp-idf/export.sh'" > ~/.bash_aliases
 
 # Set Prompt
